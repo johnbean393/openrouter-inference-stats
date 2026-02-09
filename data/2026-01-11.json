@@ -149,27 +149,6 @@
       "is_free": false
     },
     {
-      "rank": 3,
-      "slug": "xiaomi/mimo-v2-flash-20251210:free",
-      "name": "Xiaomi: MiMo-V2-Flash",
-      "total_tokens": 397692776452,
-      "percent_change": 13,
-      "prompt_tokens": 318154221161,
-      "completion_tokens": 79538555290,
-      "reasoning_tokens": 0,
-      "cached_tokens": 0,
-      "request_count": 0,
-      "prompt_ratio": 0.8,
-      "completion_ratio": 0.2,
-      "reasoning_ratio": 0.0,
-      "prompt_price": 9e-08,
-      "completion_price": 2.9e-07,
-      "reasoning_price": 2.9e-07,
-      "cache_read_price": 4.5e-08,
-      "estimated_revenue": 51700.06,
-      "is_free": false
-    },
-    {
       "rank": 8,
       "slug": "google/gemini-2.5-flash-lite",
       "name": "Google: Gemini 2.5 Flash Lite",
@@ -189,16 +168,37 @@
       "cache_read_price": 1e-08,
       "estimated_revenue": 33383.86,
       "is_free": false
+    },
+    {
+      "rank": 3,
+      "slug": "xiaomi/mimo-v2-flash-20251210:free",
+      "name": "Xiaomi: MiMo-V2-Flash",
+      "total_tokens": 397692776452,
+      "percent_change": 13,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "reasoning_tokens": 0,
+      "cached_tokens": 0,
+      "request_count": 0,
+      "prompt_ratio": 0.0,
+      "completion_ratio": 0.0,
+      "reasoning_ratio": 0.0,
+      "prompt_price": 9e-08,
+      "completion_price": 2.9e-07,
+      "reasoning_price": 2.9e-07,
+      "cache_read_price": 4.5e-08,
+      "estimated_revenue": 0.0,
+      "is_free": false
     }
   ],
-  "total_revenue": 4609777.81,
+  "total_revenue": 4558077.75,
   "total_tokens": 3270287784136,
   "total_models": 9,
   "paid_models": 9,
   "free_models": 0,
   "token_breakdown": {
-    "prompt_tokens": 3036863939687,
-    "completion_tokens": 233423844448,
+    "prompt_tokens": 2718709718526,
+    "completion_tokens": 153885289158,
     "reasoning_tokens": 49094498449,
     "cached_tokens": 1229039313737
   }

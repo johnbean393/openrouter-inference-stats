@@ -262,11 +262,15 @@ def run_backfill(num_weeks: int, today: str) -> int:
         # Sort models by token count descending
         sorted_models = sorted(week_models.items(), key=lambda x: x[1], reverse=True)
 
+        models_with_data = 0
         for slug, chart_tokens in sorted_models:
             rank += 1
             daily = all_daily_data.get(slug, {})
             activity = sum_daily_window(daily, week_end, days=7, skip_partial=False)
             activities[slug] = activity
+
+            if activity.get("prompt_tokens", 0) + activity.get("completion_tokens", 0) > 0:
+                models_with_data += 1
 
             # WoW % change
             prev_tokens = prev_models.get(slug, 0)
@@ -284,6 +288,11 @@ def run_backfill(num_weeks: int, today: str) -> int:
                 "total_tokens": chart_tokens,
                 "percent_change": pct_change,
             })
+
+        # Skip this week entirely if daily analytics are unavailable
+        if models_with_data == 0:
+            logger.info(f"  SKIPPED: no daily analytics data available for this week")
+            continue
 
         # Calculate revenue
         revenue_data = calculate_revenue(rankings_list, activities, pricing)

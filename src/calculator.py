@@ -60,14 +60,10 @@ def calculate_revenue(
 
         analytics_total = prompt_tokens + completion_tokens
 
-        # If we have no analytics data, fall back to the ranking total with a default split
+        # If we have no analytics data, this model contributes $0 revenue.
+        # We do NOT fall back to an assumed split — that produces inaccurate data.
         if analytics_total == 0:
-            logger.warning(f"No analytics data for {slug}, using ranking total with default 80/20 split")
-            prompt_tokens = int(ranking_total * 0.80)
-            completion_tokens = int(ranking_total * 0.20)
-            reasoning_tokens = 0
-            cached_tokens = 0
-            analytics_total = prompt_tokens + completion_tokens
+            logger.warning(f"No analytics data for {slug}, skipping revenue (tokens stay as ranking total)")
 
         # Calculate ratios from the actual data
         if analytics_total > 0:
@@ -75,8 +71,8 @@ def calculate_revenue(
             completion_ratio = completion_tokens / analytics_total
             reasoning_ratio = reasoning_tokens / analytics_total
         else:
-            prompt_ratio = 0.80
-            completion_ratio = 0.20
+            prompt_ratio = 0.0
+            completion_ratio = 0.0
             reasoning_ratio = 0.0
 
         # Look up pricing

@@ -149,27 +149,6 @@
       "is_free": false
     },
     {
-      "rank": 9,
-      "slug": "xiaomi/mimo-v2-flash-20251210:free",
-      "name": "Xiaomi: MiMo-V2-Flash",
-      "total_tokens": 170932816899,
-      "percent_change": 0,
-      "prompt_tokens": 136746253519,
-      "completion_tokens": 34186563379,
-      "reasoning_tokens": 0,
-      "cached_tokens": 0,
-      "request_count": 0,
-      "prompt_ratio": 0.8,
-      "completion_ratio": 0.2,
-      "reasoning_ratio": 0.0,
-      "prompt_price": 9e-08,
-      "completion_price": 2.9e-07,
-      "reasoning_price": 2.9e-07,
-      "cache_read_price": 4.5e-08,
-      "estimated_revenue": 22221.27,
-      "is_free": false
-    },
-    {
       "rank": 4,
       "slug": "openai/gpt-oss-120b",
       "name": "OpenAI: gpt-oss-120b (exacto)",
@@ -189,16 +168,37 @@
       "cache_read_price": 0.0,
       "estimated_revenue": 16546.67,
       "is_free": false
+    },
+    {
+      "rank": 9,
+      "slug": "xiaomi/mimo-v2-flash-20251210:free",
+      "name": "Xiaomi: MiMo-V2-Flash",
+      "total_tokens": 170932816899,
+      "percent_change": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "reasoning_tokens": 0,
+      "cached_tokens": 0,
+      "request_count": 0,
+      "prompt_ratio": 0.0,
+      "completion_ratio": 0.0,
+      "reasoning_ratio": 0.0,
+      "prompt_price": 9e-08,
+      "completion_price": 2.9e-07,
+      "reasoning_price": 2.9e-07,
+      "cache_read_price": 4.5e-08,
+      "estimated_revenue": 0.0,
+      "is_free": false
     }
   ],
-  "total_revenue": 3106880.8,
+  "total_revenue": 3084659.53,
   "total_tokens": 2543150652489,
   "total_models": 9,
   "paid_models": 9,
   "free_models": 0,
   "token_breakdown": {
-    "prompt_tokens": 2339356778046,
-    "completion_tokens": 203793874442,
+    "prompt_tokens": 2202610524527,
+    "completion_tokens": 169607311063,
     "reasoning_tokens": 67395631491,
     "cached_tokens": 941893120394
   }
