@@ -49,8 +49,15 @@ def _sanitize_mermaid_label(text: str) -> str:
 
 
 def _truncate_label(text: str, max_len: int = 20) -> str:
-    """Truncate label for chart readability."""
+    """Truncate label for chart readability.
+
+    If the text is in "Provider - Model Name" format, extracts just the model
+    name to avoid multiple labels showing "Anthropic - Cl.." ambiguously.
+    """
     text = _sanitize_mermaid_label(text)
+    # Extract model name from "Provider - Model Name" format
+    if " - " in text:
+        text = text.split(" - ", 1)[1]
     if len(text) > max_len:
         return text[:max_len - 2] + ".."
     return text
@@ -168,11 +175,24 @@ def _generate_revenue_over_time_chart(history: list[dict]) -> str:
 
     dates = []
     revenues = []
-    for snap in history:
+
+    # Show every Nth label to avoid x-axis crowding (~13 visible labels)
+    label_interval = max(1, len(history) // 13)
+
+    for i, snap in enumerate(history):
         d = snap.get("date", "?")
         r = snap.get("total_revenue", 0)
-        dates.append(f'"{d}"')
         revenues.append(round(r, 2))
+
+        # Only show a label at regular intervals and the last entry
+        if i % label_interval == 0 or i == len(history) - 1:
+            try:
+                dt = datetime.strptime(d, "%Y-%m-%d")
+                dates.append(f'"{dt.strftime("%b %d, %y")}"')
+            except ValueError:
+                dates.append(f'"{d}"')
+        else:
+            dates.append('" "')
 
     x_axis = ", ".join(dates)
     y_values = ", ".join(str(r) for r in revenues)
@@ -184,9 +204,9 @@ def _generate_revenue_over_time_chart(history: list[dict]) -> str:
 
 ```mermaid
 xychart-beta
-    title "Estimated Weekly Revenue (USD)"
+    title "Estimated Weekly Revenue"
     x-axis [{x_axis}]
-    y-axis "Revenue (USD)" 0 --> {y_max}
+    y-axis "Revenue ($)" 0 --> {y_max}
     bar [{y_values}]
     line [{y_values}]
 ```"""
@@ -197,7 +217,7 @@ def _generate_revenue_bar_chart(models: list[dict]) -> str:
     labels = []
     values = []
     for m in models:
-        label = _truncate_label(m["name"], 16)
+        label = _truncate_label(m["name"], 20)
         labels.append(f'"{label}"')
         values.append(round(m["estimated_revenue"], 2))
 
@@ -211,9 +231,9 @@ def _generate_revenue_bar_chart(models: list[dict]) -> str:
 
 ```mermaid
 xychart-beta
-    title "Estimated Weekly Revenue by Model (USD)"
+    title "Estimated Weekly Revenue by Model"
     x-axis [{x_axis}]
-    y-axis "Revenue (USD)" 0 --> {y_max}
+    y-axis "Revenue ($)" 0 --> {y_max}
     bar [{y_values}]
 ```"""
 
@@ -226,19 +246,21 @@ def _generate_revenue_pie_chart(models: list[dict], total_revenue: float) -> str
         label = _sanitize_mermaid_label(m["name"])
         rev = m["estimated_revenue"]
         shown_revenue += rev
-        lines.append(f'    "{label}" : {round(rev, 2)}')
+        formatted_rev = format_dollars(rev)
+        lines.append(f'    "{label} {formatted_rev}" : {round(rev, 2)}')
 
     # Add "Other" for remaining revenue
     other = total_revenue - shown_revenue
     if other > 0:
-        lines.append(f'    "Other" : {round(other, 2)}')
+        formatted_other = format_dollars(other)
+        lines.append(f'    "Other {formatted_other}" : {round(other, 2)}')
 
     pie_data = "\n".join(lines)
 
     return f"""## Revenue Share
 
 ```mermaid
-pie showData
+pie
     title Revenue Share by Model
 {pie_data}
 ```"""
@@ -258,13 +280,13 @@ def _generate_token_distribution_chart(token_breakdown: dict) -> str:
 
     lines = []
     if prompt > 0:
-        lines.append(f'    "Prompt Tokens" : {prompt}')
+        lines.append(f'    "Prompt Tokens - {format_tokens(prompt)}" : {prompt}')
     if cached > 0:
-        lines.append(f'    "Cached Input Tokens" : {cached}')
+        lines.append(f'    "Cached Input Tokens - {format_tokens(cached)}" : {cached}')
     if response_only > 0:
-        lines.append(f'    "Response Tokens" : {response_only}')
+        lines.append(f'    "Response Tokens - {format_tokens(response_only)}" : {response_only}')
     if reasoning > 0:
-        lines.append(f'    "Reasoning Tokens" : {reasoning}')
+        lines.append(f'    "Reasoning Tokens - {format_tokens(reasoning)}" : {reasoning}')
 
     if not lines:
         return ""
@@ -274,7 +296,7 @@ def _generate_token_distribution_chart(token_breakdown: dict) -> str:
     return f"""## Token Type Distribution
 
 ```mermaid
-pie showData
+pie
     title Token Distribution Across All Tracked Models
 {pie_data}
 ```"""
@@ -334,7 +356,7 @@ This data is collected automatically from public sources:
 
 ---
 
-*Data collected by [openrouter-inference-stats](https://github.com) and updated weekly via GitHub Actions.*"""
+*Data collected by [openrouter-inference-stats](https://github.com/johnbean393/openrouter-inference-stats) and updated weekly via GitHub Actions.*"""
 
 
 def _format_price_per_m(price_per_token: float) -> str:

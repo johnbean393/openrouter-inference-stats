@@ -73,9 +73,39 @@ def main():
         return run_current(today)
 
 
+def _find_recent_snapshot(today: str, days_back: int = 6) -> str | None:
+    """Check if a snapshot already exists within the last N days.
+
+    Returns the date string of the existing snapshot, or None.
+    """
+    today_dt = datetime.strptime(today, "%Y-%m-%d")
+    for offset in range(0, days_back + 1):
+        check_date = (today_dt - timedelta(days=offset)).strftime("%Y-%m-%d")
+        check_path = os.path.join(DATA_DIR, f"{check_date}.json")
+        if os.path.exists(check_path):
+            return check_date
+    return None
+
+
 def run_current(today: str) -> int:
     """Normal mode: collect current week's data and generate README."""
     logger.info(f"=== OpenRouter Revenue Stats Collection: {today} ===")
+
+    # Check for an existing snapshot within the current week to avoid duplicates
+    existing = _find_recent_snapshot(today, days_back=6)
+    if existing:
+        logger.info(
+            f"  Snapshot already exists for {existing} (within the last 7 days). "
+            "Skipping collection to avoid duplicates."
+        )
+        # Still regenerate README in case code changed
+        history = load_history()
+        if history:
+            readme_content = generate_readme(history[-1], history)
+            with open(README_PATH, "w") as f:
+                f.write(readme_content)
+            logger.info(f"  README regenerated from existing data.")
+        return 0
 
     # Step 1: Fetch model pricing from the API
     logger.info("Step 1: Fetching model pricing from API...")
