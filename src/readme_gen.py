@@ -7,6 +7,28 @@ from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
+# High-contrast color palette for Mermaid pie charts.
+# Bright, saturated colors that remain legible on both light and dark backgrounds.
+_PIE_COLORS = [
+    "#FF6384",  # pink-red
+    "#36A2EB",  # blue
+    "#FFCE56",  # yellow
+    "#4BC0C0",  # teal
+    "#9966FF",  # purple
+    "#FF9F40",  # orange
+    "#2ECC71",  # green
+    "#FF66B2",  # hot pink
+    "#00CCFF",  # sky blue
+    "#E74C3C",  # red
+    "#F39C12",  # amber
+    "#1ABC9C",  # turquoise
+]
+
+_PIE_THEME_VARS = ", ".join(
+    f"'pie{i+1}': '{c}'" for i, c in enumerate(_PIE_COLORS)
+)
+_PIE_INIT = f"%%{{init: {{'theme': 'base', 'themeVariables': {{{_PIE_THEME_VARS}}}}}}}%%"
+
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 
 
@@ -58,6 +80,33 @@ def _truncate_label(text: str, max_len: int = 20) -> str:
     # Extract model name from "Provider - Model Name" format
     if " - " in text:
         text = text.split(" - ", 1)[1]
+    if len(text) > max_len:
+        return text[:max_len - 2] + ".."
+    return text
+
+
+def _bar_chart_label(text: str, max_len: int = 14) -> str:
+    """Create a short, unique label for bar chart x-axis.
+
+    Strips provider prefix and applies common abbreviations to keep
+    labels compact and distinguishable.
+    """
+    text = _sanitize_mermaid_label(text)
+    # Strip provider prefix ("Provider - Model Name")
+    if " - " in text:
+        text = text.split(" - ", 1)[1]
+    # Abbreviate common model family names
+    abbreviations = [
+        ("Claude ", ""),
+        ("Gemini ", "Gem "),
+        ("DeepSeek ", "DS "),
+        ("MiniMax ", "MM "),
+        ("Preview", "Prev"),
+        ("Flash Lite", "Fl Lite"),
+        ("Flash", "Fl"),
+    ]
+    for old, new in abbreviations:
+        text = text.replace(old, new)
     if len(text) > max_len:
         return text[:max_len - 2] + ".."
     return text
@@ -169,43 +218,43 @@ def _generate_summary(
 
 
 def _generate_revenue_over_time_chart(history: list[dict]) -> str:
-    """Generate a Mermaid xychart for revenue over time."""
+    """Generate a Mermaid xychart for revenue over time.
+
+    Uses a numerical x-axis (week numbers) to avoid label crowding / duplicate
+    category issues that break the chart with many data points.  The date range
+    is shown in the chart title for context.
+    """
     if len(history) < 1:
         return ""
 
-    dates = []
     revenues = []
-
-    # Show every Nth label to avoid x-axis crowding (~13 visible labels)
-    label_interval = max(1, len(history) // 13)
-
-    for i, snap in enumerate(history):
-        d = snap.get("date", "?")
+    for snap in history:
         r = snap.get("total_revenue", 0)
         revenues.append(round(r, 2))
 
-        # Only show a label at regular intervals and the last entry
-        if i % label_interval == 0 or i == len(history) - 1:
-            try:
-                dt = datetime.strptime(d, "%Y-%m-%d")
-                dates.append(f'"{dt.strftime("%b %d, %y")}"')
-            except ValueError:
-                dates.append(f'"{d}"')
-        else:
-            dates.append('" "')
-
-    x_axis = ", ".join(dates)
     y_values = ", ".join(str(r) for r in revenues)
 
     max_rev = max(revenues) if revenues else 1000
     y_max = _nice_axis_max(max_rev)
 
+    # Derive date range for the title
+    first_date = history[0].get("date", "")
+    last_date = history[-1].get("date", "")
+    try:
+        first_dt = datetime.strptime(first_date, "%Y-%m-%d")
+        last_dt = datetime.strptime(last_date, "%Y-%m-%d")
+        date_range = f"{first_dt.strftime('%b %Y')} - {last_dt.strftime('%b %Y')}"
+    except ValueError:
+        date_range = f"{first_date} - {last_date}"
+
+    n = len(history)
+
     return f"""## Revenue Over Time
 
 ```mermaid
 xychart-beta
-    title "Estimated Weekly Revenue"
-    x-axis [{x_axis}]
+    title "Estimated Weekly Revenue ({date_range})"
+    x-axis "Week" 1 --> {n}
     y-axis "Revenue ($)" 0 --> {y_max}
     bar [{y_values}]
     line [{y_values}]
@@ -217,7 +266,7 @@ def _generate_revenue_bar_chart(models: list[dict]) -> str:
     labels = []
     values = []
     for m in models:
-        label = _truncate_label(m["name"], 20)
+        label = _bar_chart_label(m["name"])
         labels.append(f'"{label}"')
         values.append(round(m["estimated_revenue"], 2))
 
@@ -260,6 +309,7 @@ def _generate_revenue_pie_chart(models: list[dict], total_revenue: float) -> str
     return f"""## Revenue Share
 
 ```mermaid
+{_PIE_INIT}
 pie
     title Revenue Share by Model
 {pie_data}
@@ -296,6 +346,7 @@ def _generate_token_distribution_chart(token_breakdown: dict) -> str:
     return f"""## Token Type Distribution
 
 ```mermaid
+{_PIE_INIT}
 pie
     title Token Distribution Across All Tracked Models
 {pie_data}
