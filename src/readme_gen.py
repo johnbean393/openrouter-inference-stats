@@ -220,41 +220,39 @@ def _generate_summary(
 def _generate_revenue_over_time_chart(history: list[dict]) -> str:
     """Generate a Mermaid xychart for revenue over time.
 
-    Uses a numerical x-axis (week numbers) to avoid label crowding / duplicate
-    category issues that break the chart with many data points.  The date range
-    is shown in the chart title for context.
+    Uses categorical x-axis with short unique date labels (M/DD) for every
+    data point.  This gives thin, distinct bars (unlike numerical axes which
+    produce wide blocks).  Labels are small but each is unique, which avoids
+    the duplicate-category bug that collapsed bars when using " " placeholders.
     """
     if len(history) < 1:
         return ""
 
+    dates = []
     revenues = []
     for snap in history:
+        d = snap.get("date", "?")
         r = snap.get("total_revenue", 0)
         revenues.append(round(r, 2))
+        try:
+            dt = datetime.strptime(d, "%Y-%m-%d")
+            # Short unique label: "2/16", "12/28", etc.
+            dates.append(f'"{dt.month}/{dt.day:02d}"')
+        except ValueError:
+            dates.append(f'"{d}"')
 
+    x_axis = ", ".join(dates)
     y_values = ", ".join(str(r) for r in revenues)
 
     max_rev = max(revenues) if revenues else 1000
     y_max = _nice_axis_max(max_rev)
 
-    # Derive date range for the title
-    first_date = history[0].get("date", "")
-    last_date = history[-1].get("date", "")
-    try:
-        first_dt = datetime.strptime(first_date, "%Y-%m-%d")
-        last_dt = datetime.strptime(last_date, "%Y-%m-%d")
-        date_range = f"{first_dt.strftime('%b %Y')} - {last_dt.strftime('%b %Y')}"
-    except ValueError:
-        date_range = f"{first_date} - {last_date}"
-
-    n = len(history)
-
     return f"""## Revenue Over Time
 
 ```mermaid
 xychart-beta
-    title "Estimated Weekly Revenue ({date_range})"
-    x-axis "Week" 1 --> {n}
+    title "Estimated Weekly Revenue (USD)"
+    x-axis [{x_axis}]
     y-axis "Revenue ($)" 0 --> {y_max}
     bar [{y_values}]
     line [{y_values}]
