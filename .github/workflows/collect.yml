@@ -1,0 +1,40 @@
+name: Collect OpenRouter Stats
+
+on:
+  schedule:
+    # Run every Monday at 12:00 UTC
+    - cron: '0 12 * * 1'
+  workflow_dispatch:
+    # Allow manual trigger from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run collection pipeline
+        run: python main.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ README.md
+          # Only commit if there are changes
+          git diff --staged --quiet || git commit -m "Update stats: $(date -u +%Y-%m-%d)"
+          git push
