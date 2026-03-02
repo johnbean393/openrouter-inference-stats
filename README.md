@@ -2,14 +2,14 @@
 
 > Estimated inference revenue across models on [OpenRouter](https://openrouter.ai/rankings), calculated from public usage data and pricing.
 
-**Last updated:** 2026-02-23
+**Last updated:** 2026-03-02
 
 ## Summary
 
 | Metric | Value |
 |--------|-------|
-| Estimated Weekly Revenue | **$9.12M** |
-| Total Tokens Tracked | **8.74T** |
+| Estimated Weekly Revenue | **$10.02M** |
+| Total Tokens Tracked | **7.58T** |
 | Models Tracked | **10** (9 paid, 1 free) |
 
 ## Revenue Over Time
@@ -17,10 +17,10 @@
 ```mermaid
 xychart-beta
     title "Estimated Weekly Revenue (USD)"
-    x-axis ["11/16", "11/23", "11/30", "12/07", "12/14", "12/21", "12/28", "1/04", "1/11", "1/18", "1/25", "2/01", "2/08", "2/16", "2/23"]
-    y-axis "Revenue ($)" 0 --> 10000000
-    bar [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43]
-    line [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43]
+    x-axis ["11/16", "11/23", "11/30", "12/07", "12/14", "12/21", "12/28", "1/04", "1/11", "1/18", "1/25", "2/01", "2/08", "2/16", "2/23", "3/02"]
+    y-axis "Revenue ($)" 0 --> 20000000
+    bar [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43, 10024024.86]
+    line [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43, 10024024.86]
 ```
 
 ## Revenue by Model (Top 9)
@@ -28,9 +28,9 @@ xychart-beta
 ```mermaid
 xychart-beta
     title "Estimated Weekly Revenue by Model"
-    x-axis ["Opus 4.6", "Sonnet 4.5", "Minimax M2.5", "GLM 5", "Kimi K2.5 0127", "Gem 3 Fl Prev", "Deepseek V3.2", "Gem 2.5 Fl", "Grok 4.1 Fast"]
+    x-axis ["Opus 4.6", "Sonnet 4.6", "Sonnet 4.5", "Gem 3 Fl Prev", "GLM 5", "Minimax M2.5", "Kimi K2.5 0127", "Deepseek V3.2", "Grok 4.1 Fast"]
     y-axis "Revenue ($)" 0 --> 5000000
-    bar [3589968.98, 1834921.17, 1101083.88, 784262.88, 670464.58, 538467.05, 226573.58, 199328.9, 170984.42]
+    bar [3540510.62, 2148021.8, 1816482.64, 636716.68, 544056.45, 531517.13, 451075.63, 204883.97, 150759.95]
 ```
 
 ## Revenue Share
@@ -39,15 +39,15 @@ xychart-beta
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF6384', 'pie2': '#36A2EB', 'pie3': '#FFCE56', 'pie4': '#4BC0C0', 'pie5': '#9966FF', 'pie6': '#FF9F40', 'pie7': '#2ECC71', 'pie8': '#FF66B2', 'pie9': '#00CCFF', 'pie10': '#E74C3C', 'pie11': '#F39C12', 'pie12': '#1ABC9C'}}}%%
 pie
     title Revenue Share by Model
-    "Claude Opus 4.6 $3.59M" : 3589968.98
-    "Claude Sonnet 4.5 $1.83M" : 1834921.17
-    "Minimax M2.5 $1.10M" : 1101083.88
-    "GLM 5 $784.3K" : 784262.88
-    "Kimi K2.5 0127 $670.5K" : 670464.58
-    "Gemini 3 Flash Preview $538.5K" : 538467.05
-    "Deepseek V3.2 $226.6K" : 226573.58
-    "Gemini 2.5 Flash $199.3K" : 199328.9
-    "Grok 4.1 Fast $171.0K" : 170984.42
+    "Claude Opus 4.6 $3.54M" : 3540510.62
+    "Claude Sonnet 4.6 $2.15M" : 2148021.8
+    "Claude Sonnet 4.5 $1.82M" : 1816482.64
+    "Gemini 3 Flash Preview $636.7K" : 636716.68
+    "GLM 5 $544.1K" : 544056.45
+    "Minimax M2.5 $531.5K" : 531517.13
+    "Kimi K2.5 0127 $451.1K" : 451075.63
+    "Deepseek V3.2 $204.9K" : 204883.97
+    "Grok 4.1 Fast $150.8K" : 150759.95
 ```
 
 ## Token Type Distribution
@@ -56,26 +56,26 @@ pie
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF6384', 'pie2': '#36A2EB', 'pie3': '#FFCE56', 'pie4': '#4BC0C0', 'pie5': '#9966FF', 'pie6': '#FF9F40', 'pie7': '#2ECC71', 'pie8': '#FF66B2', 'pie9': '#00CCFF', 'pie10': '#E74C3C', 'pie11': '#F39C12', 'pie12': '#1ABC9C'}}}%%
 pie
     title Token Distribution Across All Tracked Models
-    "Prompt Tokens - 8.47T" : 8472214189635
-    "Cached Input Tokens - 5.03T" : 5033002752958
-    "Response Tokens - 166.3B" : 166269912014
-    "Reasoning Tokens - 103.6B" : 103589768344
+    "Prompt Tokens - 7.34T" : 7341844426070
+    "Cached Input Tokens - 3.98T" : 3978998296844
+    "Response Tokens - 150.4B" : 150405697478
+    "Reasoning Tokens - 89.1B" : 89097186591
 ```
 
 ## Model Breakdown
 
 | Rank | Model | Total Tokens | Cached | Prompt % | Compl. % | Input Price | Output Price | Est. Revenue | WoW |
 |------|-------|-------------|--------|----------|----------|-------------|-------------|-------------|-----|
-| 7 | [Claude Opus 4.6](https://openrouter.ai/anthropic/claude-4.6-opus-20260205) | 643.0B | 436.5B | 98.8% | 1.2% | $5.00/M | $25.00/M | $3.59M | +23% |
-| 8 | [Claude Sonnet 4.5](https://openrouter.ai/anthropic/claude-4.5-sonnet-20250929) | 534.0B | 355.2B | 98.0% | 2.0% | $3.00/M | $15.00/M | $1.83M | -15% |
-| 1 | [Minimax M2.5](https://openrouter.ai/minimax/minimax-m2.5-20260211) | 2.57T | 2.08T | 99.1% | 0.9% | $0.3000/M | $1.10/M | $1.10M | +79% |
-| 4 | [GLM 5](https://openrouter.ai/z-ai/glm-5-20260211) | 803.0B | 462.8B | 98.4% | 1.6% | $0.9500/M | $2.55/M | $784.3K | +28% |
-| 2 | [Kimi K2.5 0127](https://openrouter.ai/moonshotai/kimi-k2.5-0127) | 1.04T | 796.0B | 98.6% | 1.4% | $0.4500/M | $2.20/M | $670.5K | -20% |
-| 3 | [Gemini 3 Flash Preview](https://openrouter.ai/google/gemini-3-flash-preview-20251217) | 859.0B | 398.2B | 95.9% | 4.2% | $0.5000/M | $3.00/M | $538.5K | +11% |
-| 5 | [Deepseek V3.2](https://openrouter.ai/deepseek/deepseek-v3.2-20251201) | 745.0B | 225.1B | 96.0% | 4.0% | $0.2600/M | $0.3800/M | $226.6K | -2% |
-| 10 | [Gemini 2.5 Flash](https://openrouter.ai/google/gemini-2.5-flash) | 431.0B | 123.4B | 93.0% | 7.0% | $0.3000/M | $2.50/M | $199.3K | -4% |
-| 6 | [Grok 4.1 Fast](https://openrouter.ai/x-ai/grok-4.1-fast) | 669.0B | 157.7B | 85.4% | 14.6% | $0.2000/M | $0.5000/M | $171.0K | +20% |
-| 9 | [Trinity Large Preview (free)](https://openrouter.ai/arcee-ai/trinity-large-preview:free) | 449.0B | 0 | 98.1% | 1.9% | Free | Free | $0.00 | +2% |
+| 6 | [Claude Opus 4.6](https://openrouter.ai/anthropic/claude-4.6-opus-20260205) | 634.0B | 409.4B | 98.7% | 1.3% | $5.00/M | $25.00/M | $3.54M | -1% |
+| 5 | [Claude Sonnet 4.6](https://openrouter.ai/anthropic/claude-4.6-sonnet-20260217) | 636.0B | 442.0B | 98.6% | 1.4% | $3.00/M | $15.00/M | $2.15M | +113% |
+| 9 | [Claude Sonnet 4.5](https://openrouter.ai/anthropic/claude-4.5-sonnet-20250929) | 529.0B | 361.7B | 98.1% | 1.9% | $3.00/M | $15.00/M | $1.82M | -1% |
+| 2 | [Gemini 3 Flash Preview](https://openrouter.ai/google/gemini-3-flash-preview-20251217) | 1.03T | 482.0B | 96.2% | 3.8% | $0.5000/M | $3.00/M | $636.7K | +20% |
+| 10 | [GLM 5](https://openrouter.ai/z-ai/glm-5-20260211) | 502.0B | 227.8B | 97.3% | 2.7% | $0.9500/M | $2.55/M | $544.1K | -37% |
+| 1 | [Minimax M2.5](https://openrouter.ai/minimax/minimax-m2.5-20260211) | 1.63T | 1.18T | 98.9% | 1.1% | $0.2950/M | $1.20/M | $531.5K | -37% |
+| 4 | [Kimi K2.5 0127](https://openrouter.ai/moonshotai/kimi-k2.5-0127) | 692.0B | 485.3B | 97.5% | 2.5% | $0.4500/M | $2.20/M | $451.1K | -33% |
+| 3 | [Deepseek V3.2](https://openrouter.ai/deepseek/deepseek-v3.2-20251201) | 800.0B | 238.8B | 96.0% | 4.0% | $0.2500/M | $0.4000/M | $204.9K | +7% |
+| 7 | [Grok 4.1 Fast](https://openrouter.ai/x-ai/grok-4.1-fast) | 595.0B | 149.0B | 86.4% | 13.6% | $0.2000/M | $0.5000/M | $150.8K | -11% |
+| 8 | [Trinity Large Preview (free)](https://openrouter.ai/arcee-ai/trinity-large-preview:free) | 537.0B | 0 | 97.9% | 2.1% | Free | Free | $0.00 | +20% |
 
 ## Methodology
 
