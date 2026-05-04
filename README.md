@@ -2,35 +2,35 @@
 
 > Estimated inference revenue across models on [OpenRouter](https://openrouter.ai/rankings), calculated from public usage data and pricing.
 
-**Last updated:** 2026-04-27
+**Last updated:** 2026-05-04
 
 ## Summary
 
 | Metric | Value |
 |--------|-------|
-| Estimated Weekly Revenue | **$17.89M** |
-| Total Tokens Tracked | **10.00T** |
-| Models Tracked | **10** (10 paid, 0 free) |
+| Estimated Weekly Revenue | **$12.90M** |
+| Total Tokens Tracked | **11.85T** |
+| Models Tracked | **10** (9 paid, 1 free) |
 
 ## Revenue Over Time
 
 ```mermaid
 xychart-beta
     title "Estimated Weekly Revenue (USD)"
-    x-axis ["11/16", "11/23", "11/30", "12/07", "12/14", "12/21", "12/28", "1/04", "1/11", "1/18", "1/25", "2/01", "2/08", "2/16", "2/23", "3/02", "3/09", "3/16", "3/23", "3/30", "4/06", "4/13", "4/20", "4/27"]
+    x-axis ["11/16", "11/23", "11/30", "12/07", "12/14", "12/21", "12/28", "1/04", "1/11", "1/18", "1/25", "2/01", "2/08", "2/16", "2/23", "3/02", "3/09", "3/16", "3/23", "3/30", "4/06", "4/13", "4/20", "4/27", "5/04"]
     y-axis "Revenue ($)" 0 --> 30000000
-    bar [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43, 10024024.86, 8991833.66, 9781034.43, 13516359.09, 17042158.26, 14398956.04, 13440739.33, 14964047.88, 17890596.37]
-    line [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43, 10024024.86, 8991833.66, 9781034.43, 13516359.09, 17042158.26, 14398956.04, 13440739.33, 14964047.88, 17890596.37]
+    bar [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43, 10024024.86, 8991833.66, 9781034.43, 13516359.09, 17042158.26, 14398956.04, 13440739.33, 14964047.88, 17890596.37, 12897765.5]
+    line [2740620.94, 2816925.48, 2523142.13, 3991396.39, 3551394.6, 3084659.53, 2918272.88, 2862056.98, 4558077.75, 7057753.91, 5373700.56, 5970586.37, 6247827.58, 7177565.34, 9116055.43, 10024024.86, 8991833.66, 9781034.43, 13516359.09, 17042158.26, 14398956.04, 13440739.33, 14964047.88, 17890596.37, 12897765.5]
 ```
 
-## Revenue by Model (Top 10)
+## Revenue by Model (Top 9)
 
 ```mermaid
 xychart-beta
     title "Estimated Weekly Revenue by Model"
-    x-axis ["Opus 4.7", "Sonnet 4.6", "Opus 4.6", "Kimi K2.6", "Gem 3 Fl Prev", "Deepseek V3.2", "Minimax M2.7", "Grok 4.1 Fast", "Gem 2.5 Fl L..", "Step 3.5 Fl"]
+    x-axis ["Opus 4.7", "Sonnet 4.6", "Kimi K2.6", "Gem 3 Fl Prev", "Minimax M2.7", "Deepseek V3.2", "Grok 4.1 Fast", "Deepseek V4 Fl", "Step 3.5 Fl"]
     y-axis "Revenue ($)" 0 --> 8000000
-    bar [6391288.14, 4590909.47, 3822175.74, 1453994.43, 667755.29, 339165.13, 283277.94, 180219.96, 87132.63, 74677.64]
+    bar [5235697.65, 4577149.21, 1620801.14, 618629.37, 263883.86, 241813.02, 158517.65, 103773.97, 77499.62]
 ```
 
 ## Revenue Share
@@ -39,16 +39,16 @@ xychart-beta
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF6384', 'pie2': '#36A2EB', 'pie3': '#FFCE56', 'pie4': '#4BC0C0', 'pie5': '#9966FF', 'pie6': '#FF9F40', 'pie7': '#2ECC71', 'pie8': '#FF66B2', 'pie9': '#00CCFF', 'pie10': '#E74C3C', 'pie11': '#F39C12', 'pie12': '#1ABC9C'}}}%%
 pie
     title Revenue Share by Model
-    "Claude Opus 4.7 $6.39M" : 6391288.14
-    "Claude Sonnet 4.6 $4.59M" : 4590909.47
-    "Claude Opus 4.6 $3.82M" : 3822175.74
-    "Kimi K2.6 $1.45M" : 1453994.43
-    "Gemini 3 Flash Preview $667.8K" : 667755.29
-    "Deepseek V3.2 $339.2K" : 339165.13
-    "Minimax M2.7 $283.3K" : 283277.94
-    "Grok 4.1 Fast $180.2K" : 180219.96
-    "Gemini 2.5 Flash Lite $87.1K" : 87132.63
-    "Step 3.5 Flash $74.7K" : 74677.64
+    "Claude Opus 4.7 $5.24M" : 5235697.65
+    "Claude Sonnet 4.6 $4.58M" : 4577149.21
+    "Kimi K2.6 $1.62M" : 1620801.14
+    "Gemini 3 Flash Preview $618.6K" : 618629.37
+    "Minimax M2.7 $263.9K" : 263883.86
+    "Deepseek V3.2 $241.8K" : 241813.02
+    "Grok 4.1 Fast $158.5K" : 158517.65
+    "Deepseek V4 Flash $103.8K" : 103773.97
+    "Step 3.5 Flash $77.5K" : 77499.62
+    "Other $0.01" : 0.01
 ```
 
 ## Token Type Distribution
@@ -57,26 +57,26 @@ pie
 %%{init: {'theme': 'base', 'themeVariables': {'pie1': '#FF6384', 'pie2': '#36A2EB', 'pie3': '#FFCE56', 'pie4': '#4BC0C0', 'pie5': '#9966FF', 'pie6': '#FF9F40', 'pie7': '#2ECC71', 'pie8': '#FF66B2', 'pie9': '#00CCFF', 'pie10': '#E74C3C', 'pie11': '#F39C12', 'pie12': '#1ABC9C'}}}%%
 pie
     title Token Distribution Across All Tracked Models
-    "Prompt Tokens - 9.68T" : 9682470087353
-    "Cached Input Tokens - 5.99T" : 5990230217122
-    "Response Tokens - 234.0B" : 234011705130
-    "Reasoning Tokens - 82.9B" : 82887769404
+    "Prompt Tokens - 11.50T" : 11504848394148
+    "Cached Input Tokens - 7.83T" : 7833821907704
+    "Response Tokens - 238.5B" : 238494940975
+    "Reasoning Tokens - 99.7B" : 99676224653
 ```
 
 ## Model Breakdown
 
 | Rank | Model | Total Tokens | Cached | Prompt % | Compl. % | Input Price | Output Price | Est. Revenue | WoW |
 |------|-------|-------------|--------|----------|----------|-------------|-------------|-------------|-----|
-| 4 | [Claude Opus 4.7](https://openrouter.ai/anthropic/claude-4.7-opus-20260416) | 1.15T | 905.6B | 99.2% | 0.8% | $5.00/M | $25.00/M | $6.39M | +279% |
-| 2 | [Claude Sonnet 4.6](https://openrouter.ai/anthropic/claude-4.6-sonnet-20260217) | 1.36T | 941.1B | 98.5% | 1.5% | $3.00/M | $15.00/M | $4.59M | -2% |
-| 9 | [Claude Opus 4.6](https://openrouter.ai/anthropic/claude-4.6-opus-20260205) | 685.0B | 458.0B | 98.8% | 1.2% | $5.00/M | $25.00/M | $3.82M | -44% |
-| 1 | [Kimi K2.6](https://openrouter.ai/moonshotai/kimi-k2.6-20260420) | 1.58T | 1.37T | 98.8% | 1.2% | $0.7448/M | $4.66/M | $1.45M | 0% |
-| 5 | [Gemini 3 Flash Preview](https://openrouter.ai/google/gemini-3-flash-preview-20251217) | 1.04T | 364.9B | 95.0% | 5.0% | $0.5000/M | $3.00/M | $667.8K | -9% |
-| 3 | [Deepseek V3.2](https://openrouter.ai/deepseek/deepseek-v3.2-20251201) | 1.28T | 460.7B | 96.4% | 3.6% | $0.2520/M | $0.3780/M | $339.2K | 0% |
-| 6 | [Minimax M2.7](https://openrouter.ai/minimax/minimax-m2.7-20260318) | 790.0B | 539.5B | 98.0% | 2.0% | $0.3000/M | $1.20/M | $283.3K | -18% |
-| 7 | [Grok 4.1 Fast](https://openrouter.ai/x-ai/grok-4.1-fast) | 747.0B | 240.4B | 91.6% | 8.4% | $0.2000/M | $0.5000/M | $180.2K | +30% |
-| 10 | [Gemini 2.5 Flash Lite](https://openrouter.ai/google/gemini-2.5-flash-lite) | 651.0B | 105.0B | 89.2% | 10.8% | $0.1000/M | $0.4000/M | $87.1K | +9% |
-| 8 | [Step 3.5 Flash](https://openrouter.ai/stepfun/step-3.5-flash) | 721.0B | 602.4B | 98.2% | 1.8% | $0.1000/M | $0.3000/M | $74.7K | +98% |
+| 5 | [Claude Opus 4.7](https://openrouter.ai/anthropic/claude-4.7-opus-20260416) | 935.0B | 690.8B | 98.9% | 1.1% | $5.00/M | $25.00/M | $5.24M | -19% |
+| 3 | [Claude Sonnet 4.6](https://openrouter.ai/anthropic/claude-4.6-sonnet-20260217) | 1.35T | 924.2B | 98.4% | 1.6% | $3.00/M | $15.00/M | $4.58M | -1% |
+| 2 | [Kimi K2.6](https://openrouter.ai/moonshotai/kimi-k2.6-20260420) | 1.82T | 1.55T | 98.8% | 1.2% | $0.7400/M | $3.49/M | $1.62M | +15% |
+| 4 | [Gemini 3 Flash Preview](https://openrouter.ai/google/gemini-3-flash-preview-20251217) | 973.0B | 295.9B | 95.2% | 4.8% | $0.5000/M | $3.00/M | $618.6K | -6% |
+| 8 | [Minimax M2.7](https://openrouter.ai/minimax/minimax-m2.7-20260318) | 729.0B | 498.7B | 97.6% | 2.4% | $0.3000/M | $1.20/M | $263.9K | -8% |
+| 6 | [Deepseek V3.2](https://openrouter.ai/deepseek/deepseek-v3.2-20251201) | 907.0B | 316.5B | 95.5% | 4.5% | $0.2520/M | $0.3780/M | $241.8K | -29% |
+| 10 | [Grok 4.1 Fast](https://openrouter.ai/x-ai/grok-4.1-fast) | 646.0B | 191.1B | 89.8% | 10.2% | $0.2000/M | $0.5000/M | $158.5K | -13% |
+| 9 | [Deepseek V4 Flash](https://openrouter.ai/deepseek/deepseek-v4-flash-20260423) | 704.0B | 456.0B | 96.0% | 4.0% | $0.1400/M | $0.2800/M | $103.8K | +344% |
+| 7 | [Step 3.5 Flash](https://openrouter.ai/stepfun/step-3.5-flash) | 752.0B | 613.6B | 98.5% | 1.5% | $0.1000/M | $0.3000/M | $77.5K | +4% |
+| 1 | [Hy3 Preview (free)](https://openrouter.ai/tencent/hy3-preview-20260421:free) | 3.03T | 2.30T | 97.6% | 2.4% | Free | Free | $0.00 | +799% |
 
 ## Methodology
 
